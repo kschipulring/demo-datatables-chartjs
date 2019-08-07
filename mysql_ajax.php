@@ -13,6 +13,10 @@ $start = (isset($_GET["start"]) && is_numeric($_GET["start"])) ? $_GET["start"] 
 //number of records to return.
 $length = (isset($_GET["length"]) && is_numeric($_GET["length"])) ? $_GET["length"] : "10";
 
+$draw = (isset($_GET["draw"]) && is_numeric($_GET["draw"])) ? $_GET["draw"] : "1";
+
+//$result_obj->recordsTotal = $result_c[0]["recordsTotal"];
+
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
     // set the PDO error mode to exception
@@ -43,6 +47,11 @@ try {
 
     //now assign it to the main object
     $result_obj->recordsTotal = $result_c[0]["recordsTotal"];
+
+    $result_obj->recordsFiltered = $result_c[0]["recordsTotal"];
+
+    //work with the draw value
+    $result_obj->draw = $draw;
     
     //output
     echo json_encode($result_obj);
