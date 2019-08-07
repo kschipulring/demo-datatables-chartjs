@@ -56,12 +56,12 @@
     <h1>Chart.JS Bar Chart</h1>
 
     <canvas id="barChart" width="400" height="400"></canvas>
-    <script>
+
+
+<button id="randomizeData">Randomize Data</button>
+
+<script>
     renderBarChart("barChart");
     </script>
-
-
-
-    
 </body>
 </html>
