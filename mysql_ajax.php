@@ -13,9 +13,8 @@ $start = (isset($_GET["start"]) && is_numeric($_GET["start"])) ? $_GET["start"] 
 //number of records to return.
 $length = (isset($_GET["length"]) && is_numeric($_GET["length"])) ? $_GET["length"] : "10";
 
+//yes, we need this
 $draw = (isset($_GET["draw"]) && is_numeric($_GET["draw"])) ? $_GET["draw"] : "1";
-
-//$result_obj->recordsTotal = $result_c[0]["recordsTotal"];
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$db", $username, $password);
@@ -23,9 +22,56 @@ try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     //main query
-    $query = 'SELECT * FROM ' . $_ENV["DB_TABLE"] . " LIMIT {$start}, {$length}";
+    $query = 'SELECT * FROM ' . $_ENV["DB_TABLE"];
 
-    $sth = $conn->prepare( $query );
+    $q_where = "";
+
+    if( isset($_GET["search"]) && isset( $_GET["search"]["value"] ) && strlen($_GET["search"]["value"]) > 0 ){
+        $search = $_GET["search"]["value"];
+
+        $q_where .= " WHERE (ID LIKE '%{$search}%' 
+            OR JobTitle LIKE '%{$search}%' 
+            OR EmailAddress LIKE '%{$search}%'  
+            OR FirstNameLastName LIKE '%{$search}%'
+            OR City LIKE '%{$search}%'
+            OR State LIKE '%{$search}%' 
+            OR Phone LIKE '%{$search}%'  
+            OR Company LIKE '%{$search}%'
+            OR Gender LIKE '%{$search}%'
+            OR Department LIKE '%{$search}%')";
+    }
+
+    $q_orderby = "";
+
+    //yes, I do heavy defensive programming
+    if( isset($_GET["order"]) && isset($_GET["order"][0]) && isset($_GET["order"][0]["column"]) && $_GET["order"][0]["column"] > 0 ){
+        $order_arr = [
+            "ID",
+            "JobTitle",
+            "EmailAddress",
+            "FirstNameLastName",
+            "City",
+            "State",
+            "Phone",
+            "Company",
+            "CollegeName",
+            "Gender",
+            "Department"
+        ];
+
+        $o_index = $_GET["order"][0]["column"];
+
+        $q_orderby = " ORDER BY " . $order_arr[ $o_index ] . " ";
+
+        if( isset($_GET["order"][0]["dir"]) ){
+            $q_orderby .= $_GET["order"][0]["dir"];
+        }
+
+    }
+
+    $final_main_query = $query . $q_where . $q_orderby . " LIMIT {$start}, {$length}";
+
+    $sth = $conn->prepare( $final_main_query );
     $sth->execute();
     
     // Fetch all of the remaining rows in the result set
@@ -40,7 +86,8 @@ try {
     //now we need the complete number of ALL the records present
     $query_c = 'SELECT COUNT(*) AS recordsTotal FROM ' . $_ENV["DB_TABLE"];
 
-    $sth_c = $conn->prepare( $query_c );
+
+    $sth_c = $conn->prepare( $query_c . $q_where );
     $sth_c->execute();
 
     $result_c = $sth_c->fetchAll(PDO::FETCH_ASSOC);
