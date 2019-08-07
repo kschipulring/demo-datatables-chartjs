@@ -1,5 +1,6 @@
 $(document).ready(function() {
     $('#example').DataTable({
+        "serverSide": true,
         "ajax": "mysql_ajax.php",
         "columns": [
             { "data": "ID" },
