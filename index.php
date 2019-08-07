@@ -11,22 +11,32 @@
     <table id="example" class="display" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Extn.</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>ID</th>
+                <th>JobTitle</th>
+                <th>EmailAddress</th>
+                <th>FirstNameLastName</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Phone</th>
+                <th>Company</th>
+                <th>CollegeName</th>
+                <th>Gender</th>
+                <th>Department</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Extn.</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <th>ID</th>
+                <th>JobTitle</th>
+                <th>EmailAddress</th>
+                <th>FirstNameLastName</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Phone</th>
+                <th>Company</th>
+                <th>CollegeName</th>
+                <th>Gender</th>
+                <th>Department</th>
             </tr>
         </tfoot>
     </table>

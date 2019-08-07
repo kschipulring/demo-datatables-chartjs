@@ -1,13 +1,18 @@
 $(document).ready(function() {
     $('#example').DataTable({
-        "ajax": "objects.txt",
+        "ajax": "mysql_ajax.php",
         "columns": [
-            { "data": "name" },
-            { "data": "position" },
-            { "data": "office" },
-            { "data": "extn" },
-            { "data": "start_date" },
-            { "data": "salary" }
+            { "data": "ID" },
+            { "data": "JobTitle" },
+            { "data": "EmailAddress" },
+            { "data": "FirstNameLastName" },
+            { "data": "City" },
+            { "data": "State" },
+            { "data": "Phone" },
+            { "data": "Company" },
+            { "data": "CollegeName" },
+            { "data": "Gender" },
+            { "data": "Department" }
         ]
     });
 });
