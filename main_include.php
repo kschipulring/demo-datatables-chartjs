@@ -5,3 +5,6 @@ $env_file = $_SERVER["HTTP_HOST"] == "localhost" ? 'local' : 'live';
 
 $dotenv = Dotenv\Dotenv::create(__DIR__, "{$env_file}.env");
 $dotenv->load();
+
+$cols=["ID","JobTitle","EmailAddress","FirstNameLastName","City","State","Phone","Company",
+"CollegeName","Gender","Department"];

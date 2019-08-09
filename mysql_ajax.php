@@ -45,19 +45,7 @@ try {
 
     //yes, I do heavy defensive programming
     if( isset($_GET["order"]) && isset($_GET["order"][0]) && isset($_GET["order"][0]["column"]) && $_GET["order"][0]["column"] > 0 ){
-        $order_arr = [
-            "ID",
-            "JobTitle",
-            "EmailAddress",
-            "FirstNameLastName",
-            "City",
-            "State",
-            "Phone",
-            "Company",
-            "CollegeName",
-            "Gender",
-            "Department"
-        ];
+        $order_arr = $cols;
 
         $o_index = $_GET["order"][0]["column"];
 

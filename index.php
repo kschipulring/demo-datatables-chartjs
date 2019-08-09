@@ -1,6 +1,5 @@
 <?php
-$cols=["ID","JobTitle","EmailAddress","FirstNameLastName","City","State","Phone","Company",
-"CollegeName","Gender","Department"];
+require_once 'main_include.php';
 
 //for the plugin
 $data_cols = array_map(function($n){
