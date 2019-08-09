@@ -510,7 +510,7 @@
       "position": "Customer Support",
       "salary": "$112,000",
       "start_date": "2011/01/25",
-      "office": "New York",
+      "office": "New York City",
       "extn": "4226"
     }
   ]
