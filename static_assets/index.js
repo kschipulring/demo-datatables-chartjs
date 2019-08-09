@@ -2,20 +2,10 @@ $(document).ready(function() {
     $('#example').DataTable({
         "serverSide": true,
         "ajax": "mysql_ajax.php",
-        "columns": [
-            { "data": "ID" },
-            { "data": "JobTitle" },
-            { "data": "EmailAddress" },
-            { "data": "FirstNameLastName" },
-            { "data": "City" },
-            { "data": "State" },
-            { "data": "Phone" },
-            { "data": "Company" },
-            { "data": "CollegeName" },
-            { "data": "Gender" },
-            { "data": "Department" }
-        ]
-    });
+        "columns": window.data_cols
+	});
+	
+	renderBarChart("barChart");
 });
 
 window.c_labels = ["red",
