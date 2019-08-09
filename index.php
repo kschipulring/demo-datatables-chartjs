@@ -50,6 +50,10 @@ $table_cols = array_map(function($n){
     <h1>Chart.JS Bar Chart</h1>
 
     <canvas id="barChart" width="400" height="400"></canvas>
+    
+    <script>
+    renderBarChart("barChart");
+    </script>
 
     <button id="randomizeData">Randomize Data</button>
 </body>

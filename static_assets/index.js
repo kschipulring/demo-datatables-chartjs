@@ -4,8 +4,6 @@ $(document).ready(function() {
         "ajax": "mysql_ajax.php",
         "columns": window.data_cols
 	});
-	
-	renderBarChart("barChart");
 });
 
 window.c_labels = ["red",
@@ -119,16 +117,18 @@ function renderBarChart( elementID ){
                 }
             }
         });
+        
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            barChartData.datasets.forEach(function(dataset) {
+                dataset.data = dataset.data.map(function() {
+                    return randomScalingFactor();
+                });
+            });
+            window.myBar.update();
+        });
     };
 
-    document.getElementById('randomizeData').addEventListener('click', function() {
-        barChartData.datasets.forEach(function(dataset) {
-            dataset.data = dataset.data.map(function() {
-                return randomScalingFactor();
-            });
-        });
-        window.myBar.update();
-    });
+
 }
 
 
