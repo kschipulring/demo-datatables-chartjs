@@ -29,16 +29,15 @@ try {
     if( isset($_GET["search"]) && isset( $_GET["search"]["value"] ) && strlen($_GET["search"]["value"]) > 0 ){
         $search = $_GET["search"]["value"];
 
-        $q_where .= " WHERE (ID LIKE '%{$search}%' 
-            OR JobTitle LIKE '%{$search}%' 
-            OR EmailAddress LIKE '%{$search}%'  
-            OR FirstNameLastName LIKE '%{$search}%'
-            OR City LIKE '%{$search}%'
-            OR State LIKE '%{$search}%' 
-            OR Phone LIKE '%{$search}%'  
-            OR Company LIKE '%{$search}%'
-            OR Gender LIKE '%{$search}%'
-            OR Department LIKE '%{$search}%')";
+        $sql_str_arr = [];
+
+        for( $i=0; $i<count($cols); $i++ ){
+            $sql_str_arr []= "{$cols[$i]} LIKE '%{$search}%' \n\t<br/>";
+        }
+
+        $sql_str = implode( "OR ", $sql_str_arr );
+
+        $q_where .= " WHERE ({$sql_str}})";
     }
 
     $q_orderby = "";
