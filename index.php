@@ -10,20 +10,31 @@ $data_cols = array_map(function($n){
 $table_cols = array_map(function($n){
 	return "<th>{$n}</th>";
 }, $cols);
+
+$css_files = array_map(function($u){
+	return "\t<link href=\"{$u}\" rel=\"stylesheet\" />\n";
+}, [
+    "//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css",
+    "//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css",
+    "//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css"
+]);
+
+$js_files = array_map(function($u){
+	return "\t<script type=\"text/javascript\" language=\"javascript\" src=\"{$u}\"></script>\n";
+}, [
+    "//code.jquery.com/jquery-3.3.1.js",
+    "//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js",
+    "//maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js",
+    "//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js",
+    "static_assets/index.js?i=" . rand(1, 700),
+]);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.css" rel="stylesheet" />
+<?= implode("", $css_files); ?>
 
-    <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"></script>
-    <script type="text/javascript" language="javascript" src="static_assets/index.js?i=<?php echo rand(1, 700); ?>"></script>
+<?= implode("", $js_files); ?>
 
     <script>
     window.data_cols = <?= json_encode( $data_cols, true ); ?>;
@@ -51,10 +62,19 @@ $table_cols = array_map(function($n){
 
     <canvas id="barChart" width="400" height="400"></canvas>
     
+    <button id="randomizeData">Randomize Data</button>
+    
+    <h1>Chart.JS Pie Chart</h1>
+
+	<div id="canvas-holder-pie">
+		<canvas id="chart-area-pie"></canvas>
+    </div>
+    
     <script>
     renderBarChart("barChart");
+
+    renderPieChart("canvas-holder-pie", "canvas-area-pie");
     </script>
 
-    <button id="randomizeData">Randomize Data</button>
 </body>
 </html>

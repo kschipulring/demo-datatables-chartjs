@@ -6,13 +6,14 @@ $(document).ready(function() {
 	});
 });
 
-window.c_labels = ["red",
-"orange",
-"yellow",
-"green",
-"blue",
-"purple",
-"grey"
+window.c_labels = [
+	"red",
+	"orange",
+	"yellow",
+	"green",
+	"blue",
+	"purple",
+	"grey"
 ];
 
 window.chartColors = {
@@ -127,8 +128,49 @@ function renderBarChart( elementID ){
             window.myBar.update();
         });
     };
+}
 
 
+function renderPieChart( elementID, elementID2 ){
+	var pie_config = {
+		type: 'pie',
+		data: {
+			datasets: [{
+				data: [
+					1.25000,
+					0.98574,
+					0.12257,
+					0.09531,
+					0.00058,
+				],
+				backgroundColor: [
+					window.chartColors.red,
+					window.chartColors.orange,
+					window.chartColors.yellow,
+					window.chartColors.green,
+					window.chartColors.blue,
+				],
+				label: 'Dataset 1'
+			}],
+			labels: [
+				'Social Security, Unemployment and Labor',
+				'Medicare & Health',
+				'Food and Agriculture',
+				'Veterans Benefits',
+				'Transportation'
+			]
+		},
+		options: {
+			responsive: true
+		}
+	};
+
+	$(document).ready(function() {
+		var ctx2 = document.getElementById( "chart-area-pie" ).getContext('2d');
+		window.myPie = new Chart(ctx2, pie_config);
+	});
+
+	var colorNames = Object.keys(window.chartColors);
 }
 
 
