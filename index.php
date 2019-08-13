@@ -65,6 +65,7 @@ $js_files = array_map(function($u){
     <button id="randomizeData">Randomize Data</button>
     
     <h1>Chart.JS Pie Chart</h1>
+    <h2>USA Federal Budget, in trillions of Dollars</h2>
 
 	<div id="canvas-holder-pie">
 		<canvas id="chart-area-pie"></canvas>
